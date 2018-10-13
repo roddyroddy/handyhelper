@@ -23,7 +23,7 @@
 <body>
     <div class="container">
         <h1>Add a Job</h1>
-        <h3 style="text-align: right"><a href="/dashboard" style="margin-right: 10px">Back</a><a href="/logoff">Logout</a></h3>
+        <h3 style="text-align: right"><a href="/logoff">Logout</a></h3>
 
         <div>
             <form action="/add" method="post">
@@ -52,6 +52,8 @@
                 <br>
                 <input type="submit" value="Submit"><br>
             </form>
+            <br><a href="/dashboard" class="btn btn-primary">Back</a>
+
 
             {% if request.session.error_job %}
             <ul>
