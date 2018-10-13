@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Your Job Posting</title>
+    <style>
+
+
+    
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Your Job Posting</h1>
+        <h3 style="text-align: right"><a href="/dashboard" style="margin-right: 10px">Back</a><a href="/logoff">Logout</a></h3>
+
+        <div>
+            <form action="/update" method="post">
+                {% csrf_token %}
+                <label>Title:</label><br>
+                <input type="text" name="edit_title" value="{{job.title}}"><br>
+                <label>Description:</label><br>
+                <input type="text" name="edit_description" value="{{job.description}}"><br>
+                <br>
+                <label>Location:</label><br>
+                <input type="text" name="edit_location" value="{{job.location}}"><br><br>
+                <input type="submit" value="Submit"><br>
+                <input type="hidden" name= "id" value="{{job.id}}">
+
+                <p style="color: red">{{ request.session.login_error }}</p>
+            </form>
+        </div>
+
+
+
+
+
+
+    </div>
+    
+</body>
+</html>

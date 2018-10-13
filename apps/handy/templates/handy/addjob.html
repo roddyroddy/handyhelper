@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add A Job</title>
+    <style>
+        .container{
+            width: 70%;
+            padding-left: 20px;
+        }
+        /* *{
+            border: 1px solid black;
+        } */
+    
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add a Job</h1>
+        <h3 style="text-align: right"><a href="/dashboard" style="margin-right: 10px">Back</a><a href="/logoff">Logout</a></h3>
+
+        <div>
+            <form action="/add" method="post">
+                {% csrf_token %}
+                <label>Title:</label><br>
+                <input type="text" name="titles"><br>
+                <label>Description:</label><br>
+                <textarea type="text" name="description"></textarea><br>
+                <br>
+                <label>Location:</label><br>
+                <input type="text" name="location"><br>
+                
+                <br><label style="color: purple;">Category:</label><br>
+                <label for="text" style="color: purple;">Custom Category:</label>
+
+                <input type="text" id="custom" name="category"><br>
+                <input type="radio" id="x" name="category" value="x">
+                <label for="x">X</label><br>
+                <input type="radio" id="y" name="category" value="y">
+                <label for="y">Y</label><br>
+                <input type="radio" id="z" name="category" value="z">
+                <label for="z">Z</label><br>
+
+                
+                
+                <br>
+                <input type="submit" value="Submit"><br>
+            </form>
+
+            {% if request.session.error_job %}
+            <ul>
+                {% for msg in request.session.error_job %}
+                <li style="color: red">{{ msg }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+
+    
+
+
+
+
+
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Job</title>
+    <style>
+
+        .description{
+            border: 1px solid black;
+            display: inline block;
+            width: 40%;
+            padding-left: 10px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 style="text-align: right"><a href="/dashboard" style="margin-right: 10px">Back</a><a href="/logoff">Logout</a></h3>
+        <div>
+            <h1>Hello {{ request.session.first_name }}! These are the job details!</h1>
+            <h3>{{job.title}}</h3>
+            <div class="description">
+                <p>Description: {{job.description}}</p><br>
+                <p>Location: {{job.location}}</p><br>
+                <p style="color: purple;">Category: {{job.category}}</p><br>
+                <p>Posted by: Rod {{job.user_id.user}}</p><br>
+                <p>Posted on: {{job.created_at}}</p><br>
+            </div>
+            <br>
+            <form action="/addmy/{{ job.id }}">
+                {% csrf_token %}
+                <input type="hidden" name="title" value="{{ job.title }}">
+                <input type="hidden" name="category" value="{{ job.category }}">
+                <input type="hidden" name="description" value="{{ job.description }}">
+                <input type="hidden" name="location" value="{{ job.title }}">
+                <input type="hidden" name="user_id" value="{{ request.session.user_id }}">
+                <input type="hidden" name="jobs_id" value="{{ job.id }}">
+                <input type="hidden" name="created_at" value="{{ job.created_at }}">
+                <input type="hidden" name="updated_at" value="{{ job.updated_at }}">
+
+
+                <input type="submit" value="Add To My Jobs" class="btn-primary btn ">
+            </form>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <style>
+        .container{
+            width: 70%;
+            margin-left: 80px;
+
+        }
+        .left{
+            width: 75%;
+        }
+        .logout{
+            margin-left: 20px;
+        }
+        table{
+            border: 1px solid black;
+        }
+        th{
+            border-bottom: 1px solid black;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome {{ request.session.first_name}}! </h1><a href="/logoff" class="logout">Logout</a>
+        <h3 style="text-align: right"><a href="/addpage">Create a Job</a></h3>
+        <div class="left">
+            <table  class="table table-striped" style="width:100%">
+                <tr class="first">
+                    <th>Job</th>
+                    <th>Category</th>
+                    <th>Location</th> 
+                    <th>Action</th>
+                </tr>
+                {% for i in job %}
+                {% if i.taken == False %}
+                <tr>
+                    <td>{{i.title}}</td>
+                    <td>{{ i.category }}</td>
+                    <td>{{ i.description }}</td>
+                    <td><a href="/view/{{ i.id }}">View </a> | <a href="/addmy/{{ i.id }}">Add</a>  
+                        {% if request.session.user_id == i.user_id %}
+                           | <a href="/editpage/{{ i.id }}">Edit</a> | <a href="/delete/{{i.id}}">Cancel </a></td>
+                        {% endif %}
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+
+
+
+        </div>
+        <div class="mine">
+            <h3>{{ request.session.first_name }}'s Jobs List</h3>
+            <table class="table table-striped left">
+                <tr>
+                    <th>Job</th>
+                    <th>Actions</th>
+                </tr>
+                {% if my %}
+                {% for job in my %}
+                {% if job.taken == True %}
+                <tr>
+                    <td>{{job.title}}</td>
+                    <td> <a class="act" href="view/{{job.id}}">View</a> | <a class="act" href="/delete/{{job.id}}">Done</a> | <a href="/giveup/{{job.id}}">Give Up</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              {% endif %}
+
+
+            </table>
+
+
+
+        </div>
+
+
+        <div class="mine">
+            <table></table>
+
+
+
+
+            
+        </div>
+
+
+
+
+
+    </div>
+    
+</body>
+</html>
